@@ -36,13 +36,13 @@ if ( ! class_exists( 'Azad_Custom_Login' ) ):
             $this->define('AZAD_CUSTOM_LOGIN_FEEDBACK_SERVER','https://www.gigtechs.com');
         }
         public function includes() {
-            //include_once(AZAD_CUSTOM_LOGIN_BASENAME . 'asdf/asdf.php');
+            include_once(AZAD_CUSTOM_LOGIN_DIR_PATH . 'custom.php');
         }
         private function _hooks() {
             add_action('admin_menu',array($this,'register_options_page'));
         }
         public function render_optin() {
-            include AZAD_CUSTOM_LOGIN_DIR_PATH . 'include/azad-custom-login-optin-form.php';
+            //include AZAD_CUSTOM_LOGIN_DIR_PATH . 'include/azad-custom-login-optin-form.php';
         }
         public function textdomain() {
             
@@ -86,9 +86,34 @@ if ( ! class_exists( 'Azad_Custom_Login' ) ):
                 update_option('login_setting',array());
             }
         }
-        public static function uninstallation() {
-            update_option('login_customization');
-            update_option('login_setting');
+        public static function plugin_deactivation() {
+            //delete_option('login_customization');
+            //delete_option('login_setting');
+        }
+        public static function plugin_uninstallation() {
+            $email = get_option('admin_email');
+            $fields = array(
+                // 'email'             => $email,
+                // 'website'           => get_site_url(),
+                // 'action'            => 'Uninstall',
+                // 'reason'            => '',
+                // 'reason_detail'     => '',
+                // 'blog_language'     => get_bloginfo('language'),
+                // 'wordpress_version' => get_bloginfo('version'),
+                // 'php_version'       => PHP_VERSION,
+                // 'plugin_version'    => LOGIN_PRESS_VERSION,
+                // 'plugin_name'       => 'logpress_free'
+            );
+            $response = wp_remote_post('AZAD_FEEDBACK_SERVER',
+                array(
+                    // 'method'        => 'POST',
+                    // 'timeout'       => 5,
+                    // 'httpversion'   => '1.0',
+                    // 'blocking'      => false,
+                    // 'headers'       => array(),
+                    // 'body'          => $fields
+                )
+            );
         }
         public function get_acl_page() {
             
@@ -112,4 +137,5 @@ if(! function_exists('load_azad_custom_login')){
 $GLOBALS['azad_custom_login'] = load_azad_custom_login();
 
 register_activation_hook(__FILE__,array('Azad_Custom_Login','plugin_activation'));
+register_deactivation_hook(__FILE__,array('Azad_Custom_Login','plugin_deactivation'));
 register_uninstall_hook(__FILE__,array('Azad_Custom_Login','plugin_uninstallation'));
