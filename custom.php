@@ -56,12 +56,23 @@ if ( ! class_exists( 'Azad_Custom_Login_Customizer' ) ):
             $theme_names = array(
                 "","",__('Company','azad-custom-login'),
             );
-            $free_templates['default'] = array(
-                'img'           => plugins_url('img/bg.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
-                'thumbnail'     => plugins_url('img/thumbnail/default-1.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
-                'id'=>'asdf',
-                'name'=>'asdf'
+            $free_templates['default1'] = array(
+                'img'       => plugins_url('img/bg.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
+                'thumbnail' => plugins_url('img/thumbnail/default-1.png',AZAD_CUSTOM_LOGIN_ROOT_FILE),
+                'id'        => 'default',
+                'name'      => 'Default'
             );
+            $_count = 2;
+            while($_count <= 17) :
+                $free_templates["default{$_count}"] = array(
+                    //'img'     => plugins_url('img/bg.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
+                    'thumbnail' => plugins_url("img/thumbnail/default-{$_count}.png",AZAD_CUSTOM_LOGIN_ROOT_FILE),
+                    'id'        => 'default',
+                    'name'      => 'Default',
+                    'pro'       => 'yes'
+                );
+                $_count++;
+            endwhile;
             $login_templates = apply_filters('pro_templates',$free_templates);
             // STANDARD add_control() for Image
             $customize_azad->add_control(
