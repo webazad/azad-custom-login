@@ -37,6 +37,7 @@ if ( ! class_exists( 'Azad_Custom_Login' ) ):
         }
         public function includes() {
             include_once(AZAD_CUSTOM_LOGIN_DIR_PATH . 'custom.php');
+            include_once(AZAD_CUSTOM_LOGIN_DIR_PATH . 'classes/class-login-setup.php');
         }
         private function _hooks() {
             add_action('admin_menu',array($this,'register_options_page'));

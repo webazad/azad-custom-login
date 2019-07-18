@@ -21,6 +21,7 @@ if ( ! class_exists( 'Azad_Custom_Login_Customizer' ) ):
             
             //include(AZAD_CUSTOM_LOGIN_ROOT_PATH . 'classes/controls/background-gallery.php');
             include(AZAD_CUSTOM_LOGIN_ROOT_PATH . 'classes/control-presets.php');
+            include(AZAD_CUSTOM_LOGIN_ROOT_PATH . 'classes/controls/radio-button.php');
             
             // AZAD CUSTOM LOGIN PANEL
             $customize_azad->add_panel('azad_custom_login',array(
@@ -54,7 +55,23 @@ if ( ! class_exists( 'Azad_Custom_Login_Customizer' ) ):
             ));
             $free_templates = array();
             $theme_names = array(
-                "","",__('Company','azad-custom-login'),
+                "","",
+                __('Company','azad-custom-login'),
+                __('Personal','azad-custom-login'),
+                __('Corporate','azad-custom-login'),
+                __('Startup','azad-custom-login'),
+                __('Wedding #1','azad-custom-login'),
+                __('Wedding #2','azad-custom-login'),
+                __('Company','azad-custom-login'),
+                __('Bikers','azad-custom-login'),
+                __('Fitness','azad-custom-login'),
+                __('Shopping','azad-custom-login'),
+                __('Writers','azad-custom-login'),
+                __('Geek','azad-custom-login'),
+                __('Innovation','azad-custom-login'),
+                __('Animated','azad-custom-login'),
+                __('Professors','azad-custom-login'),
+                __('Lecturer','azad-custom-login')
             );
             $free_templates['default1'] = array(
                 'img'       => plugins_url('img/bg.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
@@ -68,7 +85,7 @@ if ( ! class_exists( 'Azad_Custom_Login_Customizer' ) ):
                     //'img'     => plugins_url('img/bg.jpg',AZAD_CUSTOM_LOGIN_ROOT_FILE),
                     'thumbnail' => plugins_url("img/thumbnail/default-{$_count}.png",AZAD_CUSTOM_LOGIN_ROOT_FILE),
                     'id'        => 'default',
-                    'name'      => 'Default',
+                    'name'      => $theme_names[$_count],
                     'pro'       => 'yes'
                 );
                 $_count++;
@@ -92,6 +109,81 @@ if ( ! class_exists( 'Azad_Custom_Login_Customizer' ) ):
                     )
                 )
             );
+            // STANDARD add_section() for AZAD CUSTOM LOGIN LOGO
+            $customize_azad->add_section('logo_section',array(
+                'title'             => __('Logo','azad'),
+                'description'       => 'Customize your logo section',        
+                'priority'          => 2,
+                'panel'             => 'azad_custom_login',
+                'capability'        => 'manage_options',
+                //'theme_supports'    => '',
+                //'type'              => '',
+                //'active_callback'   => '',
+                //'description_hidden'=> '',
+            ));
+            // STANDARD add_setting() for HEADER
+            $customize_azad->add_setting('logo_setting',array(
+                'default'               => get_template_directory_uri().'/assets/img/logo.jpg',
+                'type'                  => 'option',
+                'capability'            => 'manage_options',
+                'theme_supports'        => '',
+                'transport'             => 'postMessage', // Or refresh
+            ));
+            $customize_azad->add_control(
+                new Login_Radio_Control(
+                    $customize_azad,'customize_logo_settings',array(
+                        'label'             => 'Disable logo',
+                        'description'       => 'asdf',        
+                        'section'           => 'logo_section',
+                        'settings'          => 'logo_setting',        
+                        //'setting'         => 'logo',        
+                        'priority'          => 1,         
+                        //'choices'           => $login_templates,        
+                        //'input_attrs'       => '',        
+                        //'allow_addition'    => '',        
+                        'type'              => 'ios',        
+                        //'active_callback'   => ''        
+                    )
+                )
+            );
+            // STANDARD add_section() for AZAD CUSTOM LOGIN BACKGROUND
+            $customize_azad->add_section('background_section',array(
+                'title'             => __('Background','azad'),
+                'description'       => 'Insert logo...',        
+                'priority'          => 3,
+                'panel'             => 'azad_custom_login',
+                'capability'        => 'manage_options',
+                //'theme_supports'    => '',
+                //'type'              => '',
+                //'active_callback'   => '',
+                //'description_hidden'=> '',
+            ));
+            // STANDARD add_setting() for HEADER
+            $customize_azad->add_setting('background_setting',array(
+                'default'               => get_template_directory_uri().'/assets/img/logo.jpg',
+                'type'                  => 'option',
+                'capability'            => 'manage_options',
+                'theme_supports'        => '',
+                'transport'             => 'postMessage', // Or refresh
+            ));
+            $customize_azad->add_control(
+                new WP_Customize_Color_Control(
+                    $customize_azad,'customize_background_settings',array(
+                        'label'             => 'Disable logo',
+                        'description'       => '',        
+                        'section'           => 'background_section',
+                        'settings'          => 'background_setting',        
+                        //'setting'         => 'logo',        
+                        'priority'          => 2,         
+                        //'choices'           => $login_templates,        
+                        //'input_attrs'       => '',        
+                        //'allow_addition'    => '',        
+                        //'type'              => '',        
+                        //'active_callback'   => ''        
+                    )
+                )
+            );
+
         }
         public function login_page_custom_header(){}
         public function login_page_logo_url(){}
