@@ -1,0 +1,17 @@
+{
+    "name": "azad/azad-custom-login",
+    "description": "Plugin",
+    "type": "azad",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Azad",
+            "email": "webdevazad@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {},
+    "autoload":{
+        "psr-4":{"Inc\\":"./inc"}
+    }
+}

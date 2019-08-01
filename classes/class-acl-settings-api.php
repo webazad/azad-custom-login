@@ -90,9 +90,10 @@ if ( ! class_exists( 'ACL_Settings_API' ) ):
         // }
         public function show_navigation() {
             $html = '<h2 class="nav-tab-wrapper">';
-            $html = '<h2 class="nav-tab-wrapper">';
-            $html = '<h2 class="nav-tab-wrapper">';
-            $html = '</h2>';
+            foreach($settings_sections as $tab){
+
+            }
+            $html .= '</h2>';
             echo $html;
         }
         public function show_forms() {

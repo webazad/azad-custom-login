@@ -13,6 +13,11 @@ Text Domain: azad-custom-login
 // EXIT IF ACCESSED DIRECTLY
 defined('ABSPATH') || exit;
 
+if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
+    require_once (dirname(__FILE__) . '/vendor/autoload.php');
+}
+use Inc\Activate;
+
 if ( ! class_exists( 'Azad_Custom_Login' ) ):
 
     final class Azad_Custom_Login {
